@@ -29,7 +29,8 @@
         "https://*.greenhouse.io/*",
         "https://hire.lever.co/*",
         "https://www.facebook.com/*",
-        "https://*.github.com/*"
+        "https://*.github.com/*",
+        "https://www.meetup.com/*"
       ],
       "js": ["jquery.min.js", "myscript.js"]
     }

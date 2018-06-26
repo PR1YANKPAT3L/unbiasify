@@ -14,6 +14,8 @@ const TOGGLE_FACEBOOK_PHOTOS = 'toggleFacebookPhotos'
 const TOGGLE_FACEBOOK_NAMES = 'toggleFacebookNames'
 const TOGGLE_GITHUB_PHOTOS = 'toggleGithubPhotos'
 const TOGGLE_GITHUB_NAMES = 'toggleGithubNames'
+const TOGGLE_MEETUP_NAMES = 'toggleMeetupNames'
+const TOGGLE_MEETUP_PHOTOS = 'toggleMeetupPhotos'
 
 const URLS = {
   linkedIn: 'linkedin.com',
@@ -23,7 +25,8 @@ const URLS = {
   greenhouse: 'greenhouse.io',
   lever: 'lever.co',
   facebook: 'facebook.com',
-  github: 'github.com'
+  github: 'github.com',
+  meetup: 'meetup.com'
 }
 
 const STYLES = {
@@ -290,6 +293,22 @@ const STYLE_SHEETS = {
       ],
       nameId: 'BIAS_GITHUB_NAMES',
       photoId: 'BIAS_GITHUB_PHOTOS',
+  },
+  meetup: {
+    names: [
+      `.exploreHome-eventCard .eventCard-content .text--small:first-child.text--secondary span:first-child,
+      .event-info-hosts-text a:first-child span span:last-child,
+      .groupMember .groupMember-link p.groupMember-name,
+      .memberinfo-widget-root#meta-leaders a.memberinfo-widget:first-child ${STYLES.hidden}`
+    ],
+    photos: [
+      `.avatar, .avatar--person,
+       #meta-org-photo img,
+       ul#memberList li.memberInfo div.unit div.unit a,
+       .discussion-card .chunk .flex .flex-item .discussion-card--name ${STYLES.blur}`
+    ],
+    nameId: 'BIAS_MEETUP_NAMES',
+    photoId: 'BIAS_MEETUP_PHOTOS',
   }
 }
 
@@ -333,6 +352,11 @@ var githubUpdater = createModel(
   TOGGLE_GITHUB_PHOTOS,
   TOGGLE_GITHUB_NAMES
 )()
+var meetupUpdater = createModel(
+  'meetup',
+  TOGGLE_MEETUP_PHOTOS,
+  TOGGLE_MEETUP_NAMES
+)()
 
 changeAll = (isSet = false, val = true) => {
   linkedinUpdater('photos', isSet, val)
@@ -351,6 +375,8 @@ changeAll = (isSet = false, val = true) => {
   facebookUpdater('names', isSet, val)
   githubUpdater('photos', isSet, val)
   githubUpdater('names', isSet, val)
+  meetupUpdater('photos', isSet, val)
+  meetupUpdater('names', isSet, val)
 }
 
 var toggleAll = (function() {
@@ -416,6 +442,8 @@ getIntitialVal(TOGGLE_FACEBOOK_PHOTOS, facebookUpdater, 'photos')
 getIntitialVal(TOGGLE_FACEBOOK_NAMES, facebookUpdater, 'names')
 getIntitialVal(TOGGLE_GITHUB_PHOTOS, githubUpdater, 'photos')
 getIntitialVal(TOGGLE_GITHUB_NAMES, githubUpdater, 'names')
+getIntitialVal(TOGGLE_MEETUP_PHOTOS, meetupUpdater, 'photos')
+getIntitialVal(TOGGLE_MEETUP_NAMES, meetupUpdater, 'names')
 
 $(document).keydown(function(e) {
   var ctrlKey = e.ctrlKey || e.metaKey
@@ -509,6 +537,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break
     case request.toggleGithubNames:
       githubUpdater('names', true)
+      break
+    case request.toggleMeetupNames:
+      meetupUpdater('names', true)
+      break
+    case request.toggleMeetupPhotos:
+      meetupUpdater('photos', true)
       break
   }
 })
