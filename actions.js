@@ -1,3 +1,0 @@
-$('#actionButton').click(function() {
-    alert()
-})

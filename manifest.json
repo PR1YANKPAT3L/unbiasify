@@ -32,7 +32,7 @@
         "https://*.github.com/*",
         "https://www.meetup.com/*"
       ],
-      "js": ["jquery.min.js", "myscript.js", "actions.js"]
+      "js": ["jquery.min.js", "myscript.js"]
     }
   ],
 
