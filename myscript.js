@@ -90,6 +90,10 @@ const STYLE_SHEETS = {
       `span[class*="school"],
              span[class*="skill"],
              span[class*="degree"] ${STYLES.visible}`,
+
+        `.msg-conversation-card__participant-names ${STYLES.hidden}`,
+
+        `.feed-shared-header__text-view a ${STYLES.hidden}`
     ],
     photos: [
       `span.full-name, a[href^='https://www.linkedin.com/profile'], #sticky-rail *,
@@ -432,7 +436,6 @@ function toggleStyles(styleId, obfuscate, toggleBoolVar, url) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   switch (true) {
     case request.toggleNames:
-      alert()
       linkedinUpdater('names', true)
       break
     case request.togglePhotos:
