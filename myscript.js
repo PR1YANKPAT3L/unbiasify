@@ -105,6 +105,10 @@ const STYLE_SHEETS = {
             [id^='control_gen_'] > div.header > h3::after ${STYLES.emptyBlock}`,
 
       `#in-common > svg > circle[fill^='url('] { fill-opacity: 0 !important; fill: black !important; }`,
+
+      `.msg-facepile-grid--no-facepile .msg-facepile-grid__img ${STYLES.blur}`,
+
+      `.msg-s-message-list--envelope-enabled .msg-s-event-listitem__profile-picture ${STYLES.blur}`
     ],
     nameId: 'BIAS_NAMES_LINKEDIN',
     photoId: 'BIAS_LINKEDIN',
