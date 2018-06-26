@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var $clearLeverNames = $('#clear-lever-names')
   var $clearFacebookPhotos = $('#clear-facebook-photos')
   var $clearFacebookNames = $('#clear-facebook-names')
+  var $clearGithubPhotos = $('#clear-github-photos');
+  var $clearGithubNames = $('#clear-github-names');
 
   const TOGGLE_LINKED_IN_PHOTOS = 'togglePhotos'
   const TOGGLE_LINKED_IN_NAMES = 'toggleNames'
@@ -26,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const TOGGLE_LEVER_NAMES = 'toggleLeverNames'
   const TOGGLE_FACEBOOK_PHOTOS = 'toggleFacebookPhotos'
   const TOGGLE_FACEBOOK_NAMES = 'toggleFacebookNames'
+  const TOGGLE_GITHUB_PHOTOS = 'toggleGithubPhotos'
+  const TOGGLE_GITHUB_NAMES = 'toggleGithubNames'
 
   setInitialValues(TOGGLE_LINKED_IN_PHOTOS, $clearLinkedInPhotos)
   setInitialValues(TOGGLE_LINKED_IN_NAMES, $clearLinkedInNames)
@@ -40,6 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
   setInitialValues(TOGGLE_LEVER_NAMES, $clearLeverNames)
   setInitialValues(TOGGLE_FACEBOOK_PHOTOS, $clearFacebookPhotos)
   setInitialValues(TOGGLE_FACEBOOK_NAMES, $clearFacebookNames)
+  setInitialValues(TOGGLE_GITHUB_PHOTOS, $clearGithubPhotos)
+  setInitialValues(TOGGLE_GITHUB_NAMES, $clearGithubNames);
 
   $clearLinkedInPhotos.off().on('change', function() {
     sendMessage({ togglePhotos: true })
@@ -92,6 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
   $clearFacebookNames.off().on('change', function() {
     sendMessage({ toggleFacebookNames: true })
   })
+
+  $clearGithubPhotos.off().on('change', function() {
+    sendMessage({ toggleGithubPhotos: true })
+  });
+
+  $clearGithubNames.off().on('change', function() {
+    sendMessage({ toggleGithubNames: true })
+  });
 
   function sendMessage(message) {
     chrome.tabs.query({}, function(tabs) {

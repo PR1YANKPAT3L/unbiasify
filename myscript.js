@@ -12,6 +12,8 @@ const TOGGLE_LEVER_PHOTOS = 'toggleLeverPhotos'
 const TOGGLE_LEVER_NAMES = 'toggleLeverNames'
 const TOGGLE_FACEBOOK_PHOTOS = 'toggleFacebookPhotos'
 const TOGGLE_FACEBOOK_NAMES = 'toggleFacebookNames'
+const TOGGLE_GITHUB_PHOTOS = 'toggleGithubPhotos'
+const TOGGLE_GITHUB_NAMES = 'toggleGithubNames'
 
 const URLS = {
   linkedIn: 'linkedin.com',
@@ -21,6 +23,7 @@ const URLS = {
   greenhouse: 'greenhouse.io',
   lever: 'lever.co',
   facebook: 'facebook.com',
+  github: 'github.com'
 }
 
 const STYLES = {
@@ -272,6 +275,22 @@ const STYLE_SHEETS = {
     nameId: 'BIAS_FACEBOOK_NAMES',
     photoId: 'BIAS_FACEBOOK_PHOTOS',
   },
+  github: {
+      names: [
+        `.discussion-item .author,
+        .gh-header-meta .author,
+        .timeline-comment-header .author,
+        .contrib-person h3 a,
+        .header-nav-current-user strong.css-truncate-target ${STYLES.hidden}`
+      ],
+      photos: [
+        `.timeline-comment-avatar,
+        .avatar,
+        .link-gray-dark.no-underline.text-bold.wb-break-all ${STYLES.blur}`
+      ],
+      nameId: 'BIAS_GITHUB_NAMES',
+      photoId: 'BIAS_GITHUB_PHOTOS',
+  }
 }
 
 var linkedinUpdater = createModel(
@@ -309,6 +328,11 @@ var facebookUpdater = createModel(
   TOGGLE_FACEBOOK_PHOTOS,
   TOGGLE_FACEBOOK_NAMES
 )()
+var githubUpdater = createModel(
+  'github',
+  TOGGLE_GITHUB_PHOTOS,
+  TOGGLE_GITHUB_NAMES
+)()
 
 changeAll = (isSet = false, val = true) => {
   linkedinUpdater('photos', isSet, val)
@@ -325,6 +349,8 @@ changeAll = (isSet = false, val = true) => {
   leverUpdater('names', isSet, val)
   facebookUpdater('photos', isSet, val)
   facebookUpdater('names', isSet, val)
+  githubUpdater('photos', isSet, val)
+  githubUpdater('names', isSet, val)
 }
 
 var toggleAll = (function() {
@@ -388,6 +414,8 @@ getIntitialVal(TOGGLE_LEVER_PHOTOS, leverUpdater, 'photos')
 getIntitialVal(TOGGLE_LEVER_NAMES, leverUpdater, 'names')
 getIntitialVal(TOGGLE_FACEBOOK_PHOTOS, facebookUpdater, 'photos')
 getIntitialVal(TOGGLE_FACEBOOK_NAMES, facebookUpdater, 'names')
+getIntitialVal(TOGGLE_GITHUB_PHOTOS, githubUpdater, 'photos')
+getIntitialVal(TOGGLE_GITHUB_NAMES, githubUpdater, 'names')
 
 $(document).keydown(function(e) {
   var ctrlKey = e.ctrlKey || e.metaKey
@@ -475,6 +503,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       break
     case request.toggleFacebookPhotos:
       facebookUpdater('photos', true)
+      break
+    case request.toggleGithubPhotos:
+      githubUpdater('photos', true)
+      break
+    case request.toggleGithubNames:
+      githubUpdater('names', true)
       break
   }
 })
