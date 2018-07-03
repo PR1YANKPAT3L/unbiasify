@@ -284,7 +284,8 @@ const STYLE_SHEETS = {
         .gh-header-meta .author,
         .timeline-comment-header .author,
         .contrib-person h3 a,
-        .header-nav-current-user strong.css-truncate-target ${STYLES.hidden}`
+        .header-nav-current-user strong.css-truncate-target,
+        .vcard-names-container .vcard-names ${STYLES.hidden}`
       ],
       photos: [
         `.timeline-comment-avatar,
